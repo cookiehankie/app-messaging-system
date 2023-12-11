@@ -45,6 +45,13 @@ This document describes the architecture of the EzOut App-to-App Messaging Syste
 - NATs.io sends updates to the Merchant Web App.
 - Backend API Service integrates with Firebase for authentication (optional).
 
+```plantuml
+[Customer App - Swift] --> [Backend API Service - FastAPI] : sends checkout data via REST API
+[Backend API Service - FastAPI] --> [MongoDB] : logs data (optional)
+[Backend API Service - FastAPI] --> [NATs.io Messaging System] : publishes messages
+[NATs.io Messaging System] --> [Merchant Manager App - React] : sends real-time updates
+```
+
 ## Docker Compose and Deployment
 
 - Docker Compose is used for orchestrating the Backend API, Frontend Applications, NATs.io, and optionally MongoDB.
