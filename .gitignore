@@ -6,6 +6,10 @@ __pycache__/
 # C extensions
 *.so
 
+ezenv/
+.idea/
+.DS_Store
+
 # Distribution / packaging
 .Python
 build/
