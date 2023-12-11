@@ -1,0 +1,13 @@
+# docker-compose.yml
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - nats-server
+  nats-server:
+    image: nats:latest
+    ports:
+      - "4222:4222"
