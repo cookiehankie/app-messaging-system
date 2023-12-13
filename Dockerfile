@@ -4,6 +4,8 @@ LABEL authors="cookie-hankie"
 # Set the working directory to /app. All the subsequent instructions will be run from this directory.
 WORKDIR /app
 
+COPY ./app /app
+
 # Copy the requirements.txt file into the container at /app.
 # Use a wildcard to ensure that a requirements.txt file is not required.
 COPY requirements.txt* ./

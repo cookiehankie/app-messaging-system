@@ -2,6 +2,7 @@ from pydantic import BaseModel, Field, UUID4
 from typing import Optional
 from datetime import datetime
 
+
 class Message(BaseModel):
     session_id: UUID4
     shop_id: UUID4
