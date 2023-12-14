@@ -2,62 +2,78 @@
 
 ## Overview
 
-This document describes the architecture of the EzOut App-to-App Messaging System, designed to facilitate communication between customers using a Swift mobile application and merchant managers using a React web application. The system is crucial for real-time notifications about items being checked out and ensuring efficient store management.
+The EzOut App-to-App Messaging System is engineered to streamline communication between the Swift-based customer application and the React-based merchant management application. It plays a pivotal role in broadcasting real-time notifications pertinent to item checkouts, thus enhancing the efficacy of store management operations.
+
+## System Architecture
+
+![Component Diagram](https://github.com/cookiehankie/app-messaging-system/issues/1#issue-2040857436)
 
 ## Components
 
-### Customer Mobile App Component (Swift Application)
-- **Functionality**: Allows customers to check out items.
-- **Interfaces**: Communicates with the Backend API Service via a REST API.
+### Customer Mobile App (Swift)
 
-### Backend API Service Component (FastAPI)
-- **Functionality**: 
-  - Manages communication and data transfer between components.
-  - Implements message scope limitation based on `shop_id`.
-  - Optionally, integrates with Firebase for JWT Authentication.
-- **Interfaces**: 
-  - REST API with endpoints like `/send` and `/publish/{shop_id}`.
-  - Connection to NATs.io Component and optionally MongoDB.
+**Functionality**:
+  - Facilitates customers in checking out items seamlessly.
 
-### NATs.io Messaging System Component
-- **Functionality**: 
-  - Manages real-time message distribution.
-  - Supports subscription to specific subjects for real-time updates.
-- **Interaction**: 
-  - Communicates with the Backend API Service and Merchant Web App.
+**Interfaces**:
+  - Engages in data exchange with the Backend API Service via RESTful calls.
 
-### Merchant Web App Component (React Application)
-- **Functionality**: Displays real-time data and updates based on specific Store IDs.
-- **Interfaces**: Receives updates from the NATs.io Component.
+### Backend API Service (FastAPI)
 
-### Database Component (MongoDB)
-- **Functionality**: Stores messages and logs activity.
-- **Integration**: Utilizes MongoDB change streams for real-time data capture.
+**Functionality**:
+  - Serves as the central hub for data and message transit between the system's components.
+  - Enforces message delivery constraints by `shop_id` to ensure targeted communication.
+  - Offers integration capabilities with Firebase for robust JWT Authentication.
 
-### Firebase Authentication Service 
-- **Functionality**: Provides user authentication.
-- **Integration**: Integrated with the Backend API Service for authentication.
+**Interfaces**:
+  - Hosts RESTful endpoints `/send` and `/publish/{shop_id}` for message dispatching.
+  - Establishes connectivity with the NATs.io Messaging System and optionally with MongoDB for data persistence.
+
+### NATs.io Messaging System
+
+**Functionality**:
+  - Orchestrates the distribution of messages in real-time.
+  - Permits subscription to specified topics to enable instantaneous updates.
+
+**Interaction**:
+  - Facilitates bi-directional communication with the Backend API Service and the Merchant Web App.
+
+### Merchant Web App (React)
+
+**Functionality**:
+  - Exhibits real-time data and updates congruent with specified Store IDs.
+
+**Interfaces**:
+  - Accepts and displays notifications from the NATs.io Messaging System.
+
+### Database (MongoDB)
+
+**Functionality**:
+  - Archives messages and logs transactional activities.
+
+**Integration**:
+  - Employs MongoDB change streams to track and transmit real-time data alterations.
+
+### Firebase Authentication Service
+
+**Functionality**:
+  - Administers user authentication processes.
+
+**Integration**:
+  - Seamlessly integrates with the Backend API Service to authenticate users.
 
 ## Data Flow
 
-- Data flows from the Customer Mobile App to the Backend API Service.
-- The Backend API Service communicates with NATs.io and optionally with MongoDB.
-- NATs.io sends updates to the Merchant Web App.
-- Backend API Service integrates with Firebase for authentication (optional).
-
-```plantuml
-[Customer App - Swift] --> [Backend API Service - FastAPI] : sends checkout data via REST API
-[Backend API Service - FastAPI] --> [MongoDB] : logs data (optional)
-[Backend API Service - FastAPI] --> [NATs.io Messaging System] : publishes messages
-[NATs.io Messaging System] --> [Merchant Manager App - React] : sends real-time updates
-```
+1. The Customer Mobile App dispatches checkout data to the Backend API Service.
+2. The Backend API Service processes the data and interacts with NATs.io and MongoDB (optional).
+3. NATs.io propagates real-time updates to the Merchant Web App.
+4. The Backend API Service is fortified with Firebase for authentication procedures (optional).
 
 ## Docker Compose and Deployment
-
-- Docker Compose is used for orchestrating the Backend API, Frontend Applications, NATs.io, and optionally MongoDB.
-- A Dockerfile may be provided for custom configurations of NATs.io.
+  - Docker Compose is used for orchestrating the Backend API and NATs.io
 
 ## Additional Notes
 
-- Authentication: While JWT Authentication is conceptually included, its implementation using Firebase is suggested for future development.
-- Real-Time Data: MongoDB change streams can be leveraged for capturing real-time checkout notifications.
+**Authentication**: The system's design includes JWT Authentication, with a recommended future integration of Firebase to implement this feature.
+
+**Real-Time Data**: For capturing real-time checkout notifications, the system can utilize MongoDB change streams, adding another layer of responsiveness to the merchant's operations.
