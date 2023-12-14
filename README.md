@@ -6,7 +6,7 @@ The EzOut App-to-App Messaging System is engineered to streamline communication 
 
 ## System Architecture
 
-![Component Diagram](https://github.com/cookiehankie/app-messaging-system/issues/1#issue-2040857436)
+![app-messaging-system](https://github.com/cookiehankie/app-messaging-system/assets/106795225/88e783e9-aeae-4bcc-9eff-1b33ebf3d5c7)
 
 ## Components
 
