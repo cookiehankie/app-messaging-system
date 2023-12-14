@@ -1,6 +1,6 @@
 # app/api/messaging.py
-from fastapi import APIRouter, HTTPException
-from ..models import Message
+from fastapi import APIRouter
+from app.models import Message
 
 router = APIRouter()
 

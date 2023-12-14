@@ -1,12 +1,8 @@
 FROM python:3.9
 LABEL authors="cookie-hankie"
 
-# Set the working directory to /app. All the subsequent instructions will be run from this directory.
 WORKDIR /app
 
-COPY ./app /app
-
-# Copy the requirements.txt file into the container at /app.
 # Use a wildcard to ensure that a requirements.txt file is not required.
 COPY requirements.txt* ./
 
@@ -23,4 +19,4 @@ RUN groupadd -r appuser && useradd --no-log-init -r -g appuser appuser
 USER appuser
 
 # Command to run the Uvicorn server. This will start your FastAPI application.
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

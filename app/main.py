@@ -1,13 +1,14 @@
-from fastapi import FastAPI, HTTPException, Depends, status
+from fastapi import FastAPI
 from nats.aio.client import Client as NATS
 from uuid import UUID
-from .dependencies import get_token_header
 from .models import Message
 import json
+from .api.messaging import router as messaging_router
+
 
 app = FastAPI()
 nc = NATS()
-
+app.include_router(messaging_router)
 
 @app.post("/publish/{shop_id}")
 async def publish_message(shop_id: UUID, message: Message):
