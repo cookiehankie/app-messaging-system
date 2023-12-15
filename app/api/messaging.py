@@ -1,4 +1,6 @@
 # app/api/messaging.py
+# a Pydantic model Message in models.py that will validate the data being sent to the endpoint.
+
 from fastapi import APIRouter
 from app.models import Message
 
