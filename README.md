@@ -41,10 +41,6 @@ http://localhost:8000/publish/123e4567-e89b-42d3-a456-426614174000
 }
 ```
 ### Terminal
-```python
-# Publish the message to the NATs server
-subject = f"updates.store.{shop_id}"
-```
 
  ```shell
 nats sub XXX -s nats://localhost:4222
@@ -53,7 +49,12 @@ nats sub XXX -s nats://localhost:4222
 ```shell
 nats sub updates.store.123e4567-e89b-42d3-a456-426614174000 -s nats://localhost:4222
 ```
-
+ - Because we defined in `messaging.py`:
+```python
+# Publish the message to the NATs server
+subject = f"updates.store.{shop_id}"
+```
+- Terminal Updates
 ```
 Subscribing on updates.store.123e4567-e89b-42d3-a456-426614174000
 ```
@@ -62,7 +63,7 @@ Subscribing on updates.store.123e4567-e89b-42d3-a456-426614174000
 [#1] Received on "updates.store.123e4567-e89b-42d3-a456-426614174000"
 {"session_id": "4e29b2d3-7c8a-446e-a4e1-d8e2a51c0e94", "shop_id": "123e4567-e89b-42d3-a456-426614174000", "shopper_id": "ab29b2d3-7c8a-446e-a4e1-d8e2a51c0e94", "action_id": 101, "create_time": "2023-12-18 10:30:00+00:00", "action": "ADD", "product_name": "FUJI Apples", "product_id": 500100, "product_price": 3.5, "UPC": "042100005264", "category_id": "fruit", "basket_total": 12.18}
 ```
-- Match with the JSON file we POSTed
+- Above message matches with the JSON file we POSTed
 
 **Additionally**,
 **we can automate this message-receiving test by running the file `test/test_api.py`**
