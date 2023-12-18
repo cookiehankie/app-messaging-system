@@ -6,8 +6,7 @@ The EzOut App-to-App Messaging System is engineered to streamline communication 
 
 ## System Architecture
 
-![app-messaging-system](https://github.com/cookiehankie/app-messaging-system/assets/106795225/88e783e9-aeae-4bcc-9eff-1b33ebf3d5c7)
-
+![app-messaging-system](https://github.com/cookiehankie/app-messaging-system/assets/106795225/0f675d87-736e-42ad-a240-4e19569f205d)
 ## Components
 
 ### Customer Mobile App (Swift)
@@ -38,6 +37,14 @@ The EzOut App-to-App Messaging System is engineered to streamline communication 
 **Interaction**:
   - Facilitates bi-directional communication with the Backend API Service and the Merchant Web App.
 
+### Resgate
+
+**Functionality**:
+  - Provides a real-time API gateway for the NATS.io messaging system, enabling REST and WebSocket connections.
+
+**Integration**:
+  - Bridges the gap between the frontend applications and the NATS.io system, offering real-time synchronization capabilities.
+
 ### Merchant Web App (React)
 
 **Functionality**:
@@ -65,12 +72,15 @@ The EzOut App-to-App Messaging System is engineered to streamline communication 
 ## Data Flow
 
 1. The Customer Mobile App dispatches checkout data to the Backend API Service.
-2. The Backend API Service processes the data and interacts with NATs.io and MongoDB (optional).
-3. NATs.io propagates real-time updates to the Merchant Web App.
-4. The Backend API Service is fortified with Firebase for authentication procedures (optional).
+2. The Backend API Service processes the data and publishes it to the NATs.io Messaging System.
+3. Resgate listens to NATs.io for new messages and transforms the NATS messaging into WebSockets or HTTP responses.
+4. The Merchant Web App subscribes to Resgate to receive real-time updates through WebSocket connections or HTTP streaming, enabling a reactive user interface that reflects changes in real-time.
+5. If integrated, MongoDB stores the transaction records and the Backend API Service can react to changes via MongoDB change streams, which can also be published to NATs.io for additional real-time updates.
+6. The Backend API Service, if configured, uses Firebase for user authentication, which controls access to the publishing and subscribing of messages.
+
 
 ## Docker Compose and Deployment
-  - Docker Compose is used for orchestrating the Backend API and NATs.io
+  - Docker Compose is used for orchestrating the Backend API, NATs.io, Resgate and Frontend.
 
 ## Additional Notes
 
