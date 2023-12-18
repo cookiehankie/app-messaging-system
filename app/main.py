@@ -34,7 +34,6 @@ async def startup_event():
     await connect_to_nats()
 
 
-
 @app.on_event("shutdown")
 async def shutdown_nats():
     # Gracefully close the connection to the NATS server

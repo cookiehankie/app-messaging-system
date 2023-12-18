@@ -38,5 +38,3 @@ async def publish_message(shop_id: UUID, message: Message):
     print(subject)
     await nc.publish(subject, message_json)
     return {"status": f"Message sent to shop ID {shop_id}"}
-
-
