@@ -1,11 +1,12 @@
 import asyncio
 from nats.aio.client import Client as NATS
 import pytest
+from app.nats import nc
 
 
 @pytest.mark.asyncio
 async def test_nats():
-    nc = NATS()
+    # nc = NATS()
     try:
         await nc.connect(servers=["nats://localhost:4222"])
         print("Successfully connected to NATS.")

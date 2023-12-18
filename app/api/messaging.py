@@ -21,12 +21,12 @@ def json_encoder(obj):
     raise TypeError(f'Object of type {obj.__class__.__name__} is not JSON serializable')
 
 
-@router.get("/send")
-async def send_message():
-
-    # Example of sending a message.
-    await nc.publish("updates", b'Item')
-    return {"message": "sent"}
+# @router.get("/send")
+# async def send_message():
+#
+#     # Example of sending a message.
+#     await nc.publish("updates", b'Item')
+#     return {"message": "sent"}
 
 
 @router.post("/publish/{shop_id}")

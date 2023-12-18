@@ -41,7 +41,7 @@ async def shutdown_nats():
 
 
 # handler function for messages
-async def message_handler(msg):
-    subject = msg.subject
-    data = msg.data.decode()
-    print(f"Received a message on '{subject}': {data}")
+# async def message_handler(msg):
+#     subject = msg.subject
+#     data = msg.data.decode()
+#     print(f"Received a message on '{subject}': {data}")

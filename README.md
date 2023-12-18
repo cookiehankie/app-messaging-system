@@ -7,8 +7,67 @@ The EzOut App-to-App Messaging System is engineered to streamline communication 
 ## System Architecture
 
 ![app-messaging-system](https://github.com/cookiehankie/app-messaging-system/assets/106795225/0f675d87-736e-42ad-a240-4e19569f205d)
-## Components
 
+## Feature Visualization
+### Postman
+ - POST
+```
+http://localhost:8000/publish/{shop_id}
+```
+```
+http://localhost:8000/publish/123e4567-e89b-42d3-a456-426614174000
+```
+- Body: JSON
+```json
+{
+    "session_id": "4e29b2d3-7c8a-446e-a4e1-d8e2a51c0e94",
+    "shop_id": "123e4567-e89b-42d3-a456-426614174000",
+    "shopper_id": "ab29b2d3-7c8a-446e-a4e1-d8e2a51c0e94",
+    "action_id": 101,
+    "create_time": "2023-12-18T10:30:00.000Z",
+    "action": "ADD",
+    "product_name": "FUJI Apples",
+    "product_id": 500100,
+    "product_price": 3.50,
+    "UPC": "042100005264",
+    "category_id": "fruit",
+    "basket_total": 12.18
+}
+```
+ - Output
+```json
+{
+    "status": "Message sent to shop ID 123e4567-e89b-42d3-a456-426614174000"
+}
+```
+### Terminal
+```python
+# Publish the message to the NATs server
+subject = f"updates.store.{shop_id}"
+```
+
+ ```shell
+nats sub XXX -s nats://localhost:4222
+```
+
+```shell
+nats sub updates.store.123e4567-e89b-42d3-a456-426614174000 -s nats://localhost:4222
+```
+
+```
+Subscribing on updates.store.123e4567-e89b-42d3-a456-426614174000
+```
+- Updates after the POST
+```
+[#1] Received on "updates.store.123e4567-e89b-42d3-a456-426614174000"
+{"session_id": "4e29b2d3-7c8a-446e-a4e1-d8e2a51c0e94", "shop_id": "123e4567-e89b-42d3-a456-426614174000", "shopper_id": "ab29b2d3-7c8a-446e-a4e1-d8e2a51c0e94", "action_id": 101, "create_time": "2023-12-18 10:30:00+00:00", "action": "ADD", "product_name": "FUJI Apples", "product_id": 500100, "product_price": 3.5, "UPC": "042100005264", "category_id": "fruit", "basket_total": 12.18}
+```
+- Match with the JSON file we POSTed
+
+**Additionally**,
+**we can automate this message-receiving test by running the file `test/test_api.py`**
+
+## Components
 ### Customer Mobile App (Swift)
 
 **Functionality**:
