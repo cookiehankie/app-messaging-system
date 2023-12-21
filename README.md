@@ -68,6 +68,30 @@ Subscribing on updates.store.123e4567-e89b-42d3-a456-426614174000
 **Additionally**,
 **we can automate this message-receiving test by running the file `test/test_api.py`**
 
+
+## CI / CD
+
+![CICD](https://github.com/cookiehankie/app-messaging-system/assets/106795225/ea0f707f-5ce4-493c-92ed-c844d5d1d192)
+
+
+This project uses GitHub Actions for Continuous Integration (CI) and Continuous Deployment (CD). The CI process runs automated tests to ensure the integrity of the codebase. Upon successful integration, the CD process builds the Docker image and pushes it to Docker Hub, making the deployment process seamless and automated.
+
+### GitHub Workflow for CI/CD
+
+- **CI Workflow**: On every push to the `main` branch, automated tests are executed to validate the changes.
+- **CD Workflow**: On successful CI runs, the Docker image is built and pushed to Docker Hub under the `latest` tag.
+
+### Docker Hub Repository
+
+The Docker images are stored in a public repository on Docker Hub, which can be found here:
+[Docker Hub Repository](https://hub.docker.com/r/ygu41/app-messaging-system)
+
+To pull the latest image:
+```shell
+docker pull ygu41/app-messaging-system:latest
+```
+
+
 ## Components
 ### Customer Mobile App (Swift)
 
