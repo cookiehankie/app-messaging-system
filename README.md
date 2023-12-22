@@ -1,5 +1,15 @@
 # EzOut App-to-App Messaging System
 
+## Table of Contents
+- [Overview](#overview)
+- [System Architecture](#system-architecture)
+- [Feature Visualization](#feature-visualization)
+- [CI / CD](#ci--cd)
+- [Components](#components)
+- [Data Flow](#data-flow)
+- [Docker Compose and Deployment](#docker-compose-and-deployment)
+- [Additional Notes](#additional-notes)
+
 ## Overview
 
 The EzOut App-to-App Messaging System is engineered to streamline communication between the Swift-based customer application and the React-based merchant management application. It plays a pivotal role in broadcasting real-time notifications pertinent to item checkouts, thus enhancing the efficacy of store management operations.
